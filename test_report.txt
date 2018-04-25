@@ -1,0 +1,150 @@
+test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... ok
+test_attrerror (UnitTest.TestDict) ... ERROR
+
+======================================================================
+ERROR: test_attrerror (UnitTest.TestDict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 50, in test_attrerror
+    value = d.empty
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 12, in __getattr__
+    return self[item]
+KeyError: 'empty'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (errors=1)
+test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... ok
+test_attrerror (UnitTest.TestDict) ... ERROR
+
+======================================================================
+ERROR: test_attrerror (UnitTest.TestDict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 50, in test_attrerror
+    value = d.empty
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 12, in __getattr__
+    return self[item]
+KeyError: 'empty'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (errors=1)
+1523581730.0802639test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... ok
+test_attrerror (UnitTest.TestDict) ... ERROR
+
+======================================================================
+ERROR: test_attrerror (UnitTest.TestDict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 50, in test_attrerror
+    value = d.empty
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 12, in __getattr__
+    return self[item]
+KeyError: 'empty'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (errors=1)
+
+2018-04-04/13/18 09-13-47
+test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... ok
+test_attrerror (UnitTest.TestDict) ... ERROR
+
+======================================================================
+ERROR: test_attrerror (UnitTest.TestDict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 50, in test_attrerror
+    value = d.empty
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 12, in __getattr__
+    return self[item]
+KeyError: 'empty'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (errors=1)
+
+2018-04-13 09-14-54
+test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... ok
+test_attrerror (UnitTest.TestDict) ... ERROR
+
+======================================================================
+ERROR: test_attrerror (UnitTest.TestDict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 50, in test_attrerror
+    value = d.empty
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 12, in __getattr__
+    return self[item]
+KeyError: 'empty'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (errors=1)
+
+2018-04-13 09:15:09
+test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... ok
+test_attrerror (UnitTest.TestDict) ... ERROR
+
+======================================================================
+ERROR: test_attrerror (UnitTest.TestDict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 50, in test_attrerror
+    value = d.empty
+  File "C:\Users\litao\PycharmProjects\HeadToFirst\UnitTest.py", line 12, in __getattr__
+    return self[item]
+KeyError: 'empty'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (errors=1)
+
+2018-04-13 09:52:40 AM
+test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... skipped 'dont test this func'
+test_attrerror (UnitTest.TestDict) ... skipped 'dont run this'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK (skipped=2)
+
+2018-04-13 10:41:49 AM
+test_init (UnitTest.TestDict) ... ok
+test_key (UnitTest.TestDict) ... ok
+test_attr (UnitTest.TestDict) ... ok
+test_keyerror (UnitTest.TestDict) ... skipped 'dont test this func'
+test_attrerror (UnitTest.TestDict) ... skipped 'dont run this'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+OK (skipped=2)
