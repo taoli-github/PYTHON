@@ -1,3 +1,4 @@
+# _*_ coding:utf-8 _*_
 from datetime import datetime, timedelta
 
 
@@ -286,16 +287,16 @@ from html.entities import name2codepoint
 class MyHtmlParser(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
-        print('start_tag:<%s> attr:' % (tag, str(attrs)))
+        print('start_tag:<%s> attr: %s' % (tag.encode('utf-8'), str(attrs).encode('utf-8')))
 
     def handle_endtag(self, tag):
         print('end_tag:</%s>' % tag)
 
     def handle_startendtag(self, tag, attrs):
-        print('start_end_tag:<%s/> attr:' % (tag, str(attrs)))
+        print('start_end_tag:<%s/> attr:%s ' % (tag, attrs))
 
     def handle_data(self, data):
-        print('data:%s' % data)
+        print('data:%s' % data.encode('utf-8'))
 
     def handle_comment(self, data):
         print('<!- comment:%s ->' % data)
@@ -307,14 +308,129 @@ class MyHtmlParser(HTMLParser):
         print('&#%s' % name)
 
 
-# with urlopen('https://www.python.org/events/python-events/') as f:
-#     html = f.read()
-#     parser.feed(str(html))
-
 parser = MyHtmlParser()
-parser.feed('''<html>
-<head></head>
-<body>
-<!-- test html parser -->
-    <p>Some <a href=\"#\">html</a> HTML&nbsp;tutorial...<br>END</p>
-</body></html>''')
+with urlopen('https://www.python.org/events/python-events/') as f:
+    html = f.read()
+    parser.feed(str(html))
+
+
+#
+print('&&&&&&&&&&&&& 第三方库')
+
+
+from PIL import Image, ImageFilter, ImageDraw, ImageFont
+import random
+
+
+im = Image.open('./img/Desert.jpg')
+w, h = im.size
+print('jpg size is %s,%s' % (w, h))
+im.thumbnail((w//2, h//2))
+print('thumbnail size: %s, %s' % im.size)
+im.save('./img/thumbnail.jpg', 'jpeg')
+
+im2 = Image.open('./img/Desert.jpg')
+im3 = im2.filter(ImageFilter.BLUR)
+im3.save('./img/blur.jpg', 'jpeg')
+
+
+def rnd_char():
+    return chr(random.randint(65, 90))
+
+
+def rand_color():
+    return random.randint(64, 255), random.randint(64, 255), random.randint(64, 255)
+
+
+def rand_color_1():
+    return random.randint(64, 255), random.randint(64, 255), random.randint(64, 255)
+
+
+img_h = 60
+img_w = 60 * 4
+img = Image.new('RGB', (img_w, img_h), (255,255,255))
+font = ImageFont.truetype('./fonts/Arial.ttf', 36)
+
+draw = ImageDraw.Draw(img)
+for x in range(img_w):
+    for y in range(img_h):
+        draw.point((x, y), fill=rand_color())
+
+for i in range(4):
+    draw.text((60 * i + 10, 10), text=rnd_char(),font=font, fill=rand_color_1())
+    img.rotate(random.randint(0,50), expand=0)
+
+img.save('./img/code.jpg', 'jpeg')
+
+
+import requests
+
+# r = requests.get('http://www.baidu.com', params={'wd':'python'}, cookies={'ts':datetime.timestamp(datetime.now())}, timeout=2.5)
+
+r = requests.get('http://www.baidu.com', params={'wd':'python'})
+print(r.status_code, r.reason)
+print(r.url)
+print('data:%s' % r.text.encode('utf-8'))
+print('content:%s' % r.content)
+print(r.encoding)
+
+r_wea = requests.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json')
+print(r_wea.json())
+
+r_header = requests.get('http://www.douban.com', headers={'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit'})
+print(r.content.decode('utf-8'))
+
+# r = requests.post(url, data={'a':b})
+# upload_files = {'file': open('./img/code.jpg', 'rb')}
+# requests.post(url,files=upload_files)
+print(r.headers)
+print(r.headers['Content-Type'])
+print(r.cookies)
+
+
+import chardet
+print(chardet.detect(r.text.encode('utf-8'))['encoding'])
+
+import psutil
+
+
+print(psutil.cpu_count())
+print(psutil.cpu_count(logical=False))
+print(psutil.cpu_times())
+
+for x in range(3):
+    print(psutil.cpu_percent(interval=1, percpu=True))
+
+print(psutil.virtual_memory())
+print(psutil.swap_memory())
+
+print(psutil.disk_partitions())
+print(psutil.disk_usage('/'))
+print(psutil.disk_io_counters())
+
+print(psutil.net_io_counters())
+print(psutil.net_if_addrs())
+print(psutil.net_if_stats())
+print(psutil.net_connections())
+
+print(psutil.pids())
+p = psutil.Process(1552)
+print(p.name())
+print(p.exe())
+print(p.cwd())
+print(p.cmdline())
+print(p.ppid())
+print(p.parent())
+print(p.children())
+print(p.status())
+print(p.username())
+print(p.create_time())
+print(p.terminal())
+print(p.cpu_times())
+print(p.memory_info())
+print(p.open_files())
+print(p.connections())
+print(p.num_threads())
+print(p.threads())
+print(p.environ())
+p.terminate()
