@@ -45,3 +45,5 @@ print(re.match(greedy_pattern, '102300').groups())
 # 预编译正则表达式 compile
 re_com = re.compile(p1)
 print(re_com.match('010-01234567').groups())
+
+# search()
