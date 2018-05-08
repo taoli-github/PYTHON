@@ -764,4 +764,34 @@ Traceback (most recent call last):
     10 / 0
 ZeroDivisionError: division by zero
 
-2018-04-20 16:57:44 PM
+2018-04-20 16:57:44 PM2018-05-09 00:58:16 AM -root-ERROR-JournalGO:division by zero
+Traceback (most recent call last):
+  File "G:/pycharmprojects/python/JournalGO.py", line 852, in <module>
+    10 / 0
+ZeroDivisionError: division by zero
+
+2018-05-09 00:58:16 AM2018-05-09 00:59:06 AM -root-ERROR-JournalGO:division by zero
+Traceback (most recent call last):
+  File "G:/pycharmprojects/python/JournalGO.py", line 852, in <module>
+    10 / 0
+ZeroDivisionError: division by zero
+
+2018-05-09 00:59:06 AM2018-05-09 00:59:44 AM -root-ERROR-JournalGO:division by zero
+Traceback (most recent call last):
+  File "G:/pycharmprojects/python/JournalGO.py", line 852, in <module>
+    10 / 0
+ZeroDivisionError: division by zero
+
+2018-05-09 00:59:44 AM2018-05-09 01:00:12 AM -root-ERROR-JournalGO:division by zero
+Traceback (most recent call last):
+  File "G:/pycharmprojects/python/JournalGO.py", line 852, in <module>
+    10 / 0
+ZeroDivisionError: division by zero
+
+2018-05-09 01:00:12 AM2018-05-09 01:00:12 AM -root-ERROR-JournalGO:division by zero
+Traceback (most recent call last):
+  File "G:\pycharmprojects\python\JournalGO.py", line 852, in <module>
+    10 / 0
+ZeroDivisionError: division by zero
+
+2018-05-09 01:00:12 AM

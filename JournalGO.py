@@ -925,7 +925,8 @@ print(w_byte_f.read())
 print(os.name)
 # os.uname() windows dont support this attribute.\
 d = dict(os.environ)
-print(d['CATALINA_HOME'], os.environ.get('CATALINA_HOME'))
+print(d)
+# print(d['CATALINA_HOME'], os.environ.get('CATALINA_HOME'))
 
 # directory
 print(os.path.abspath('.'))
