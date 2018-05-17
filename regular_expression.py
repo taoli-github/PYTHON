@@ -39,7 +39,7 @@ t_pattern = r'^(0[0-9]|1[0-9]|2[0-3]|[0-9]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|
 print(re.match(t_pattern, '19:36:00').groups())
 
 # greedy
-greedy_pattern = r'^(\d+?)(0*)$'
+greedy_pattern = r'^(\d*?)(0*)$'
 print(re.match(greedy_pattern, '102300').groups())
 
 # 预编译正则表达式 compile
@@ -47,3 +47,12 @@ re_com = re.compile(p1)
 print(re_com.match('010-01234567').groups())
 
 # search()
+# 原子 \n \t \s \w \d
+pa = '\w\dpython\w'
+string_n = 'dafd3456pythony_df'
+sea = re.search(pa, string_n)
+print(sea.group(0))
+
+pa1 = '[^xyz]py'
+string_11 = 'xzapython'
+print(re.search(pa1, string_11))
