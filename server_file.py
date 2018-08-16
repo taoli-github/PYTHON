@@ -4,6 +4,7 @@ import os
 import base64
 import urllib.parse as parser
 import threading
+import multiprocessing
 from time import sleep, ctime
 
 
@@ -93,6 +94,46 @@ def task():
     print(ctime())
 
 
+lock = multiprocessing.Lock()
+
+
+def a(x):
+    lock.acquire()
+    print('县城%s 启动' % os.getpid())
+    lock.release()
+
+    with open(x, 'rb') as f:
+        pic_base64_str = base64.b64encode(f.read())
+
+    similarity = face_recgonization(pic_base64_str, img_22)
+    print('%s,similarity:%s' % (x, similarity))
+
+    lock.acquire()
+    print('县城%s 结束' % os.getpid())
+    lock.release()
+
+
+def process_test():
+
+    list_dir = ['G:\\PersonPictures\\' + x for x in os.listdir(r'G:\PersonPictures')]
+
+    process_pool = multiprocessing.Pool(4)
+
+    print(ctime())
+    process_pool.map(a, list_dir)
+    print(ctime())
+
+
+img_22 = ''
+with open(r'd:\2.jpg', 'rb') as f:
+    img_22 = base64.b64encode(f.read())
+
 if __name__ == '__main__':
-    task()
+
+    # 进程执行
+    process_test()
+
+    # 线程
+    # task()
+    # 串行
     # main()
