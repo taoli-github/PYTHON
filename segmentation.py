@@ -28,7 +28,7 @@ def pro_seg(obj):
     for w, p in res:
         if w in stop_words:
             continue
-        if p == 'symptom' or p == 'sign':
+        if p == 'symptom' or p == 'sign' or p == 'disease':
             dic.append({'word': w, 'property': p})
     return dic
 
@@ -37,5 +37,5 @@ if __name__ == '__main__':
     jieba.load_userdict('userdict.txt')
     with open('stopwords.txt', 'r', encoding='utf-8') as f:
         stop_words = f.read().split('\n')
-    main()
-    # print('/'.join(jieba.cut('外阴肿物1年')))
+    # main()
+    print(pro_seg('主动脉瓣狭窄'))
