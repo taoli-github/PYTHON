@@ -123,17 +123,26 @@ def process_test():
     process_pool.map(a, list_dir)
     print(ctime())
 
-
-img_22 = ''
-with open(r'd:\2.jpg', 'rb') as f:
-    img_22 = base64.b64encode(f.read())
+#
+# img_22 = ''
+# with open(r'd:\2.jpg', 'rb') as f:
+#     img_22 = base64.b64encode(f.read())
 
 if __name__ == '__main__':
 
     # 进程执行
-    process_test()
+    # process_test()
 
     # 线程
     # task()
     # 串行
     # main()
+    data = {'sentence':'胸痛，胸闷,怀孕，恶心，呕吐三天'}
+    url_params = parser.urlencode(data).encode('utf-8')
+    url = 'http://10.68.4.53:8228/segment/'
+
+    req = request.Request(url, data=url_params)
+
+    with request.urlopen(req) as f:
+        similarity = f.read()
+    print(str(base64.decodebytes(similarity), encoding='utf-8'))

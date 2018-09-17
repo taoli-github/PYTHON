@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web socket</title>
+
+    <script type="text/javascript">
+        var conn_state = 0;
+        var webSendSocket = new WebSocket('ws://192.168.99.101:60001');
+
+        webSendSocket.onerror = function(e){
+            console.log('error' + e.data);
+            conn_state = 0;
+        };
+
+        webSendSocket.onopen = function(e) {
+            console.log('connect robot success.');
+            conn_state = 1;
+
+            // close multi-speech recognition
+            // webSendSocket.send('{"msg_id":"SPEECH_ISR_STOP_REQ"}');
+
+            // close speech service
+            // webSendSocket.send('{"msg_id":"SPEECH_SERVICE_STOP_REQ"}');
+
+            // close face recg service
+            // webSendSocket.send('{"msg_id":"FACE_DETECT_SERVICE_STOP_REQ"}');
+
+        };
+
+        webSendSocket.onmessage = function(e){
+            var re_val = eval('(' + e.data + ')');
+
+            console.log('receive message time:' + new Date());
+            console.log('receive server message:' + e.data);
+
+            handleRobotCommand(re_val);
+        };
+
+        function handleRobotCommand(re_val)
+        {
+            // handle robot return value
+            var msg_id = re_val.msg_id;
+
+            switch (msg_id)
+            {
+                case "FACE_DATABASE_RSP":
+                    showFaceDb(re_val);
+                    break;
+                case "FACE_DETECT_FACE_LIST_NTF":
+                    faceRecgonition(re_val)
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function close_ws()
+        {
+            // close web socket
+            // webSendSocket.close();
+            conn_state = 0;
+        }
+
+        function clc(){
+            // web socket open/close
+            if(conn_state == 0)
+            {
+                // open web socket
+
+            } else
+            {
+                // close web socket
+
+            }
+        }
+
+        function getFaceList () {
+            // get robot face lists
+            webSendSocket.send('{"msg_id":"FACE_DATABASE_REQ"}');
+        }
+
+        function showFaceDb(faceList) {
+            // show face datebase
+            var face_inner_html = "";
+            faceList.data_list.forEach(function(ele){
+                var info = ele.id + "," + ele.name;
+                face_inner_html += info;
+                console.log(info);
+            });
+            document.getElementById("db").innerHTML = face_inner_html;
+        }
+
+        function faceRecgonition(faceInfo)
+        {
+            // face recgonition
+            var face_info = faceInfo.face_list;
+            face_info.forEach(function(ele){
+                var face_rec = ele.face_recg;
+                // name
+                var face_name = face_rec.name;
+                // confidence
+                var face_confidence = face_rec.confidence;
+                // person_id
+                var face_id = face_rec.person_id;
+
+                console.log('name:' + face_name );
+                console.log(', confidence:' + face_confidence);
+                console.log(', id:'+ face_id);
+
+                if(face_id != '' && face_id != '-1')
+                {
+                    //close_ws();
+                }
+            });
+        }
+
+        function openFace()
+        {
+            var msg = webSendSocket.send('{"msg_id":"FACE_DETECT_SERVICE_START_REQ"}');
+            //console.log('open face recg service:' + eval('(' + msg + ')').msg_id);
+        }
+
+        function closeFace()
+        {
+            var msg = webSendSocket.send('{"msg_id":"FACE_DETECT_SERVICE_STOP_REQ"}');
+            //console.log('close face recg service:' + eval('(' + msg + ')').msg_id);
+        }
+
+        function judge()
+        {
+            console.log('setinterval 1');
+        }
+
+        setInterval('judge', 1000);
+    </script>
+</head>
+<body>
+    <input type="button" value="getFaceDb" onclick="getFaceList()" />
+    <div id="db">
+
+    </div>
+    <input type="button" value="openFace" onclick="openFace()" />
+    <input type="button" value="closeFace" onclick="closeFace()" />
+</body>
+</html>

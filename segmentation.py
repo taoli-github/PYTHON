@@ -38,4 +38,4 @@ if __name__ == '__main__':
     with open('stopwords.txt', 'r', encoding='utf-8') as f:
         stop_words = f.read().split('\n')
     # main()
-    print(pro_seg('主动脉瓣狭窄'))
+    print(pro_seg('胸痛，胸闷，心悸，腹部不适'))

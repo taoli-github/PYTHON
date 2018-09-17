@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>face recg</title>
+    <script type="text/javascript">
+
+        var mediaStreamTrack = null;
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({
+              video: true
+            }).then(function(stream) {
+                console.log(stream);
+
+                mediaStreamTrack = typeof stream.stop === 'function' ? stream : stream.getTracks()[0];
+
+                var video = document.querySelector('video');
+                video.src = window.URL.createObjectURL(stream);
+                video.onloadedmetadata = function(e) {
+                    video.play();
+                };
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
+        var canvas = null;
+        function snap(){
+            canvas = document.getElementById("canvas");
+            var context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, 200, 150);
+
+            img_base64_str = canvas.toDataURL("image/jpeg");
+            base64_str = img_base64_str.replace("data:image/jpeg;base64,","")
+            console.log(base64_str);
+        }
+        function close_video()
+        {
+            mediaStreamTrack && mediaStreamTrack.stop();
+        }
+    </script>
+</head>
+<body>
+    <video id="video" width="320" height="240" autoplay style="border:1px solid red;"></video>
+	<button id="snap" onclick="snap()">Snap Photo</button>
+	<button id="close" onclick="close_video()">close_video</button>
+	<canvas id="canvas" width="200" height="150"></canvas>
+</body>
+</html>
