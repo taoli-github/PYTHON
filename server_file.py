@@ -5,6 +5,7 @@ import base64
 import urllib.parse as parser
 import threading
 import multiprocessing
+import json
 from time import sleep, ctime
 
 
@@ -128,6 +129,32 @@ def process_test():
 # with open(r'd:\2.jpg', 'rb') as f:
 #     img_22 = base64.b64encode(f.read())
 
+
+def get_segment(sentence):
+
+    url = 'http://10.68.4.55:10321/segment?sentence2=' + parser.quote(sentence)
+    with request.urlopen(url) as f:
+        res = str(f.read(), encoding='utf-8').encode('utf-8').decode('unicode_escape')
+    for r in json.loads(res):
+        print(r)
+
+
+def post_segment(setence):
+    """
+    jieba
+    :return:
+    """
+    data = {'sentence': ''+ setence + ''}
+    url_params = parser.urlencode(data).encode('utf-8')
+    url = 'http://10.68.4.53:8228/segment/'
+
+    req = request.Request(url, data=url_params)
+
+    with request.urlopen(req) as f:
+        similarity = f.read()
+    print(str(base64.decodebytes(similarity), encoding='utf-8'))
+
+
 if __name__ == '__main__':
 
     # 进程执行
@@ -137,12 +164,7 @@ if __name__ == '__main__':
     # task()
     # 串行
     # main()
-    data = {'sentence':'胸痛，胸闷,怀孕，恶心，呕吐三天'}
-    url_params = parser.urlencode(data).encode('utf-8')
-    url = 'http://10.68.4.53:8228/segment/'
-
-    req = request.Request(url, data=url_params)
-
-    with request.urlopen(req) as f:
-        similarity = f.read()
-    print(str(base64.decodebytes(similarity), encoding='utf-8'))
+    sentence = '干哕,纳差，肚子疼，拉肚子，乏力心慌,手抖，闹肚子，干呕，拉稀，打喷嚏，流鼻涕,' \
+               ',食欲减退,上腹部不适、腹胀'
+    get_segment(sentence)
+    post_segment(sentence)

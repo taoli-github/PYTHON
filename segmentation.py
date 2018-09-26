@@ -2,6 +2,7 @@
 import jieba
 import jieba.posseg as posg
 import pandas as pd
+import logging
 
 
 def main():
@@ -33,9 +34,17 @@ def pro_seg(obj):
     return dic
 
 
+logging.basicConfig(filename='seg.log',
+                    format='%(asctime)s -%(name)s-%(levelname)s-%(module)s:%(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S %p',
+                    level=logging.INFO
+                    )
+
+
 if __name__ == '__main__':
     jieba.load_userdict('userdict.txt')
     with open('stopwords.txt', 'r', encoding='utf-8') as f:
         stop_words = f.read().split('\n')
     # main()
-    print(pro_seg('胸痛，胸闷，心悸，腹部不适'))
+    result = pro_seg('乏力纳差心慌手抖')
+    logging.info(result)
